@@ -41,6 +41,11 @@ public class ProductoServiceImpl implements ProductoService{
     @Override
     public int update(int id, Producto item) {
         item.setId(id);
-        return mapper.update(item);
+        Producto p = mapper.findById(id);
+        p.setCantidad(id);
+        p.setNombre(item.getNombre());
+        p.setPrecio(item.getPrecio());
+        p.setCantidad(item.getCantidad());
+        return mapper.update(p);
     }
 }

@@ -25,9 +25,10 @@ function editar(id) {
         url: "/productos/" + id,
         type: 'GET',
         success: function (w) {
-            $("#editar_titulo").val(w.titulo);
-            $("#editar_descripcion").val(w.descripcion);
-            $("#idpost").val(w.idpost);
+            $("#editar_nombre").val(w.nombre);
+            $("#editar_precio").val(w.precio);
+            $("#editar_cantidad").val(w.cantidad);
+            $("#idprod").val(w.id);
         }
     });
     $("#modalEditar").modal('show');
@@ -71,13 +72,15 @@ function eliminar(id) {
     });
 }
 $("#guardar").click(function () {
-    var titulo = $("#titulo").val();
-    var desc = $("#descripcion").val();
+    let nombre = $("#nombre").val();
+    let precio = $("#precio").val();
+    let cantidad = $("#cantidad").val();
+    //alert(nombre+"|"+precio+"|"+cantidad);
     $.ajax({
-        url: "/productos/add",
+        url: "/productos",
         type: 'POST',
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({'titulo': titulo, 'descripcion': desc}),
+        data: JSON.stringify({'nombre': nombre, 'precio': precio, 'cantidad':cantidad}),
         cache: false,
         success: function (w) {
             bootbox.alert({
@@ -97,9 +100,13 @@ function limpiar() {
     $("#descripcion").val("");
 }
 $("#modificar").click(function () {
-    var titulo = $("#editar_titulo").val();
-    var desc = $("#editar_descripcion").val();
-    var id = $("#idpost").val();
+    let nombre = $("#editar_nombre").val();
+    let precio = $("#editar_precio").val();
+    let cantidad = $("#editar_cantidad").val();
+    var id = $("#idprod").val();
+    
+ //alert(nombre+"|"+precio+"|"+cantidad+"|"+id);
+    
     bootbox.confirm({
         message: "Realmente desea Modificar?",
         buttons: {
@@ -115,10 +122,10 @@ $("#modificar").click(function () {
         callback: function (result) {
             if (result) {
                 $.ajax({
-                    url: "/post/edit",
+                    url: "/productos/"+ id,
                     type: 'PUT',
                     contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({'idpost': id, 'titulo': titulo, 'descripcion': desc}),
+                    data: JSON.stringify({'id': id, 'nombre': nombre, 'precio': precio, 'cantidad':cantidad}),
                     cache: false,
                     success: function (w) {
                         bootbox.alert({

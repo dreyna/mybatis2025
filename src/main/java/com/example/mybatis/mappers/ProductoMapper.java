@@ -28,9 +28,9 @@ public interface ProductoMapper {
     @Delete("DELETE FROM producto WHERE id = #{id}")
     int deleteById(@Param("id") int id);
 
-    @Insert("INSERT INTO producot(id, nombre, precion, cantidad) VALUES (#{id}, #{nombre}, #{precio}), #{cantidad})")
+    @Insert("INSERT INTO producto(id, nombre, precio, cantidad) VALUES (#{id}, #{nombre}, #{precio}, #{cantidad})")
     int save(Producto item);
 
-    @Update("UPDATE producto SET nombre=#{nombre}, precio=#{precio}, nombre=#{cantidad} WHERE id=#{id}")
+    @Update("UPDATE producto SET nombre=#{nombre}, precio=#{precio}, cantidad=#{cantidad} WHERE id=#{id}")
     int update(Producto item);
 }
